@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "ATSAME51J19A Bare Metal",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/SAME51_DFP/3.6.130/include/**",
+                "${workspaceFolder}/CMSIS_5/CMSIS/Core/Include/**",
+                "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/12.2 mpacbti-rel1/arm-none-eabi/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "__ATSAME51J19A__=1",
+                "ARMCM4_FP=1"
+            ],
+            "windowsSdkVersion": "10.0.22000.0",
+            "compilerPath": "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/12.2 mpacbti-rel1/bin/arm-none-eabi-gcc.exe",
+            "cStandard": "gnu11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "windows-gcc-arm"
+        }
+    ],
+    "version": 4
+}

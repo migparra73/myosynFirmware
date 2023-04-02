@@ -1,0 +1,50 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Unprotect bootloader",
+            "type": "shell",
+            "command": "openocd -f ${workspaceFolder}/scripts/openocd/utility/unprotect_bootloader.cfg"
+        },
+        {
+            "label": "Flash Debug Program to Target",
+            "type": "shell",
+            "command": "openocd -f ${workspaceFolder}/scripts/openocd/utility/programming.cfg"
+        },
+        {
+            "label": "Flash Release Program to Target",
+            "type": "shell",
+            "command": "openocd -f ${workspaceFolder}/scripts/openocd/utility/programming.cfg"
+        },
+        {
+            "label": "Build Debug",
+            "type": "shell",
+            "command": "mingw32-make -f ${workspaceFolder}/Makefile_Debug",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Clean Debug",
+            "type": "shell",
+            "command": "mingw32-make -f ${workspaceFolder}/Makefile_Debug clean",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build Release",
+            "type": "shell",
+            "command": "mingw32-make -f ${workspaceFolder}/Makefile_Release",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Clean Release",
+            "type": "shell",
+            "command": "mingw32-make -f ${workspaceFolder}/Makefile_Release clean",
+            "problemMatcher": []
+        }
+    ]
+}

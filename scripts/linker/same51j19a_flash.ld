@@ -31,6 +31,7 @@
 OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
 OUTPUT_ARCH(arm)
 SEARCH_DIR(.)
+ENTRY(Reset_Handler)
 
 /* Memory Spaces Definitions */
 MEMORY
@@ -146,6 +147,8 @@ SECTIONS
         . = ALIGN(4);
         _ebss = . ;
         _ezero = .;
+        __bss_start__ = _sbss;
+        __bss_end__ = _ebss;
     } > ram
 
     /* stack section */

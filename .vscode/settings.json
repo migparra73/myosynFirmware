@@ -1,0 +1,28 @@
+{
+    "files.associations": {
+        "same51j19a.h": "c",
+        "base.h": "c",
+        "stdint.h": "c",
+        "system_same51.h": "c"
+    },
+    // These settings tweaks to the cmake plugin will ensure
+    // that you debug using cortex-debug instead of trying to launch
+    // a Pico binary on the host
+    "cmake.statusbar.advanced": {
+        "debug": {
+            "visibility": "hidden"
+        },
+        "launch": {
+            "visibility": "hidden"
+        },
+        "build": {
+            "visibility": "default"
+        },
+        "buildTarget": {
+            "visibility": "hidden"
+        }
+    },
+    "cortex-debug.openocdPath": "openocd.exe",
+    "cortex-debug.variableUseNaturalFormat": false,
+    "cortex-debug.registerUseNaturalFormat": false
+}

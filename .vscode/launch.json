@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "[DebugBuild] Debug via CMSIS-DAP",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/debugBuild/myosynDebug.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd", // make sure that the openocd is in your path as well.
+            // This may need to be arm-none-eabi-gdb depending on your system
+            "gdbPath" : "arm-none-eabi-gdb", // Make sure that the ARM build tools are in your path.
+            "device": "ATSAME51J19A",
+            "configFiles": [
+                "${workspaceFolder}/scripts/openocd/interface/cmsis-dap.cfg",
+                "${workspaceFolder}/scripts/openocd/target/atsame5x.cfg"
+            ],
+            // Uncomment the line below if you are having problems with debugging.
+            // "showDevDebugOutput": "raw",
+            "openOCDLaunchCommands": [
+                "transport select swd",
+            ],
+            "svdFile": "${workspaceFolder}/scripts/target/ATSAME51J19A.svd",
+            "runToMain": false,
+            // Work around for stopping at main on restart
+            "postResetCommands": [
+            ],
+        },
+   ]
+}

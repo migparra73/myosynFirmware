@@ -1,0 +1,44 @@
+# Project name
+PROJ_NAME = myosynRelease
+
+# Toolchain
+CC = arm-none-eabi-gcc
+AS = arm-none-eabi-as
+LD = arm-none-eabi-gcc
+OBJCOPY = arm-none-eabi-objcopy
+SIZE = arm-none-eabi-size
+INCLUDE = -I./include -I./SAME51_DFP/3.6.130/include/ -I./CMSIS_5/CMSIS/Core/Include/
+BUILD_DIRECTORY = releaseBuild
+LINKER_DIRECTIVE_DIRECTORY = ./scripts/linker/
+
+# Compiler and linker flags
+CFLAGS_ERRORS = -Wall -Wextra -Werror -Wunused -Wfloat-equal -Wshadow -Wstack-usage=49152 #Check stack size in same51j19a_flash.ld
+CFLAGS_RELEASE = -mcpu=cortex-m4 -mthumb -O2 -g $(CFLAGS_ERRORS)  $(INCLUDE)
+ASFLAGS = -mcpu=cortex-m4 -mthumb
+LDFLAGS = -mcpu=cortex-m4 -mthumb -specs=nosys.specs -Wl,-Map=$(BUILD_DIRECTORY)/$(PROJ_NAME).map -T $(LINKER_DIRECTIVE_DIRECTORY)same51j19a_flash.ld
+
+# Source files
+C_SOURCES = startup_same51j19a.c stubs.c main.c
+#ASM_SOURCES = reset_handler.s
+OBJECTS = $(C_SOURCES:%.c=$(BUILD_DIRECTORY)/%.o) $(ASM_SOURCES:%.s=$(BUILD_DIRECTORY)/%.o)
+
+# Build rules
+all: $(BUILD_DIRECTORY)/$(PROJ_NAME).elf
+
+$(BUILD_DIRECTORY)/$(PROJ_NAME).elf: $(OBJECTS)
+	$(LD) $(LDFLAGS) -o $@ $^
+	$(OBJCOPY) -O binary $@ $(BUILD_DIRECTORY)/$(PROJ_NAME).bin
+	$(SIZE) $@
+
+$(BUILD_DIRECTORY)/%.o: %.c initDirectory
+	$(CC) $(CFLAGS_RELEASE) -c $< -o $@
+
+$(BUILD_DIRECTORY)/%.o: %.s initDirectory
+	$(AS) $(ASFLAGS) -o $@ $<
+
+clean:
+	rm -f -r $(BUILD_DIRECTORY)/*.o $(BUILD_DIRECTORY)/*.elf $(BUILD_DIRECTORY)/*.bin $(BUILD_DIRECTORY)/*.map
+	cmd.exe /c rmdir $(BUILD_DIRECTORY)
+	cmd.exe /c mkdir $(BUILD_DIRECTORY)
+
+.PHONY: all clean

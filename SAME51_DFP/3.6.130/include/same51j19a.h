@@ -217,161 +217,161 @@ typedef enum IRQn
 typedef struct _DeviceVectors
 {
   /* Stack pointer */
-  void* pvStack;
+  void *pvStack;
   /* CORTEX-M4 handlers */
-  void* pfnReset_Handler;                        /* -15 Reset Vector, invoked on Power up and warm reset */
-  void* pfnNonMaskableInt_Handler;               /* -14 Non maskable Interrupt, cannot be stopped or preempted */
-  void* pfnHardFault_Handler;                    /* -13 Hard Fault, all classes of Fault */
-  void* pfnMemoryManagement_Handler;             /* -12 Memory Management, MPU mismatch, including Access Violation and No Match */
-  void* pfnBusFault_Handler;                     /* -11 Bus Fault, Pre-Fetch-, Memory Access Fault, other address/memory related Fault */
-  void* pfnUsageFault_Handler;                   /* -10 Usage Fault, i.e. Undef Instruction, Illegal State Transition */
-  void* pvReservedC9;
-  void* pvReservedC8;
-  void* pvReservedC7;
-  void* pvReservedC6;
-  void* pfnSVCall_Handler;                       /*  -5 System Service Call via SVC instruction */
-  void* pfnDebugMonitor_Handler;                 /*  -4 Debug Monitor */
-  void* pvReservedC3;
-  void* pfnPendSV_Handler;                       /*  -2 Pendable request for system service */
-  void* pfnSysTick_Handler;                      /*  -1 System Tick Timer */
+  void (*pfnReset_Handler);                        /* -15 Reset Vector, invoked on Power up and warm reset */
+  void (*pfnNonMaskableInt_Handler);               /* -14 Non maskable Interrupt, cannot be stopped or preempted */
+  void (*pfnHardFault_Handler);                    /* -13 Hard Fault, all classes of Fault */
+  void (*pfnMemoryManagement_Handler);             /* -12 Memory Management, MPU mismatch, including Access Violation and No Match */
+  void (*pfnBusFault_Handler);                     /* -11 Bus Fault, Pre-Fetch-, Memory Access Fault, other address/memory related Fault */
+  void (*pfnUsageFault_Handler);                   /* -10 Usage Fault, i.e. Undef Instruction, Illegal State Transition */
+  void (*pvReservedC9);
+  void (*pvReservedC8);
+  void (*pvReservedC7);
+  void (*pvReservedC6);
+  void (*pfnSVCall_Handler);                       /*  -5 System Service Call via SVC instruction */
+  void (*pfnDebugMonitor_Handler);                 /*  -4 Debug Monitor */
+  void (*pvReservedC3);
+  void (*pfnPendSV_Handler);                       /*  -2 Pendable request for system service */
+  void (*pfnSysTick_Handler);                      /*  -1 System Tick Timer */
 
   /* Peripheral handlers */
-  void* pfnPM_Handler;                           /*   0 Power Manager (PM) */
-  void* pfnMCLK_Handler;                         /*   1 Main Clock (MCLK) */
-  void* pfnOSCCTRL_XOSC0_Handler;                /*   2 Oscillators Control (OSCCTRL) */
-  void* pfnOSCCTRL_XOSC1_Handler;                /*   3 Oscillators Control (OSCCTRL) */
-  void* pfnOSCCTRL_DFLL_Handler;                 /*   4 Oscillators Control (OSCCTRL) */
-  void* pfnOSCCTRL_DPLL0_Handler;                /*   5 Oscillators Control (OSCCTRL) */
-  void* pfnOSCCTRL_DPLL1_Handler;                /*   6 Oscillators Control (OSCCTRL) */
-  void* pfnOSC32KCTRL_Handler;                   /*   7 32kHz Oscillators Control (OSC32KCTRL) */
-  void* pfnSUPC_OTHER_Handler;                   /*   8 Supply Controller (SUPC) */
-  void* pfnSUPC_BODDET_Handler;                  /*   9 Supply Controller (SUPC) */
-  void* pfnWDT_Handler;                          /*  10 Watchdog Timer (WDT) */
-  void* pfnRTC_Handler;                          /*  11 Real-Time Counter (RTC) */
-  void* pfnEIC_EXTINT_0_Handler;                 /*  12 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_1_Handler;                 /*  13 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_2_Handler;                 /*  14 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_3_Handler;                 /*  15 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_4_Handler;                 /*  16 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_5_Handler;                 /*  17 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_6_Handler;                 /*  18 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_7_Handler;                 /*  19 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_8_Handler;                 /*  20 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_9_Handler;                 /*  21 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_10_Handler;                /*  22 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_11_Handler;                /*  23 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_12_Handler;                /*  24 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_13_Handler;                /*  25 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_14_Handler;                /*  26 External Interrupt Controller (EIC) */
-  void* pfnEIC_EXTINT_15_Handler;                /*  27 External Interrupt Controller (EIC) */
-  void* pfnFREQM_Handler;                        /*  28 Frequency Meter (FREQM) */
-  void* pfnNVMCTRL_0_Handler;                    /*  29 Non-Volatile Memory Controller (NVMCTRL) */
-  void* pfnNVMCTRL_1_Handler;                    /*  30 Non-Volatile Memory Controller (NVMCTRL) */
-  void* pfnDMAC_0_Handler;                       /*  31 Direct Memory Access Controller (DMAC) */
-  void* pfnDMAC_1_Handler;                       /*  32 Direct Memory Access Controller (DMAC) */
-  void* pfnDMAC_2_Handler;                       /*  33 Direct Memory Access Controller (DMAC) */
-  void* pfnDMAC_3_Handler;                       /*  34 Direct Memory Access Controller (DMAC) */
-  void* pfnDMAC_OTHER_Handler;                   /*  35 Direct Memory Access Controller (DMAC) */
-  void* pfnEVSYS_0_Handler;                      /*  36 Event System Interface (EVSYS) */
-  void* pfnEVSYS_1_Handler;                      /*  37 Event System Interface (EVSYS) */
-  void* pfnEVSYS_2_Handler;                      /*  38 Event System Interface (EVSYS) */
-  void* pfnEVSYS_3_Handler;                      /*  39 Event System Interface (EVSYS) */
-  void* pfnEVSYS_OTHER_Handler;                  /*  40 Event System Interface (EVSYS) */
-  void* pfnPAC_Handler;                          /*  41 Peripheral Access Controller (PAC) */
-  void* pvReserved42;
-  void* pvReserved43;
-  void* pvReserved44;
-  void* pfnRAMECC_Handler;                       /*  45 RAM ECC (RAMECC) */
-  void* pfnSERCOM0_0_Handler;                    /*  46 Serial Communication Interface (SERCOM0) */
-  void* pfnSERCOM0_1_Handler;                    /*  47 Serial Communication Interface (SERCOM0) */
-  void* pfnSERCOM0_2_Handler;                    /*  48 Serial Communication Interface (SERCOM0) */
-  void* pfnSERCOM0_OTHER_Handler;                /*  49 Serial Communication Interface (SERCOM0) */
-  void* pfnSERCOM1_0_Handler;                    /*  50 Serial Communication Interface (SERCOM1) */
-  void* pfnSERCOM1_1_Handler;                    /*  51 Serial Communication Interface (SERCOM1) */
-  void* pfnSERCOM1_2_Handler;                    /*  52 Serial Communication Interface (SERCOM1) */
-  void* pfnSERCOM1_OTHER_Handler;                /*  53 Serial Communication Interface (SERCOM1) */
-  void* pfnSERCOM2_0_Handler;                    /*  54 Serial Communication Interface (SERCOM2) */
-  void* pfnSERCOM2_1_Handler;                    /*  55 Serial Communication Interface (SERCOM2) */
-  void* pfnSERCOM2_2_Handler;                    /*  56 Serial Communication Interface (SERCOM2) */
-  void* pfnSERCOM2_OTHER_Handler;                /*  57 Serial Communication Interface (SERCOM2) */
-  void* pfnSERCOM3_0_Handler;                    /*  58 Serial Communication Interface (SERCOM3) */
-  void* pfnSERCOM3_1_Handler;                    /*  59 Serial Communication Interface (SERCOM3) */
-  void* pfnSERCOM3_2_Handler;                    /*  60 Serial Communication Interface (SERCOM3) */
-  void* pfnSERCOM3_OTHER_Handler;                /*  61 Serial Communication Interface (SERCOM3) */
-  void* pfnSERCOM4_0_Handler;                    /*  62 Serial Communication Interface (SERCOM4) */
-  void* pfnSERCOM4_1_Handler;                    /*  63 Serial Communication Interface (SERCOM4) */
-  void* pfnSERCOM4_2_Handler;                    /*  64 Serial Communication Interface (SERCOM4) */
-  void* pfnSERCOM4_OTHER_Handler;                /*  65 Serial Communication Interface (SERCOM4) */
-  void* pfnSERCOM5_0_Handler;                    /*  66 Serial Communication Interface (SERCOM5) */
-  void* pfnSERCOM5_1_Handler;                    /*  67 Serial Communication Interface (SERCOM5) */
-  void* pfnSERCOM5_2_Handler;                    /*  68 Serial Communication Interface (SERCOM5) */
-  void* pfnSERCOM5_OTHER_Handler;                /*  69 Serial Communication Interface (SERCOM5) */
-  void* pvReserved70;
-  void* pvReserved71;
-  void* pvReserved72;
-  void* pvReserved73;
-  void* pvReserved74;
-  void* pvReserved75;
-  void* pvReserved76;
-  void* pvReserved77;
-  void* pfnCAN0_Handler;                         /*  78 Control Area Network (CAN0) */
-  void* pfnCAN1_Handler;                         /*  79 Control Area Network (CAN1) */
-  void* pfnUSB_OTHER_Handler;                    /*  80 Universal Serial Bus (USB) */
-  void* pfnUSB_SOF_HSOF_Handler;                 /*  81 Universal Serial Bus (USB) */
-  void* pfnUSB_TRCPT0_Handler;                   /*  82 Universal Serial Bus (USB) */
-  void* pfnUSB_TRCPT1_Handler;                   /*  83 Universal Serial Bus (USB) */
-  void* pvReserved84;
-  void* pfnTCC0_OTHER_Handler;                   /*  85 Timer Counter Control (TCC0) */
-  void* pfnTCC0_MC0_Handler;                     /*  86 Timer Counter Control (TCC0) */
-  void* pfnTCC0_MC1_Handler;                     /*  87 Timer Counter Control (TCC0) */
-  void* pfnTCC0_MC2_Handler;                     /*  88 Timer Counter Control (TCC0) */
-  void* pfnTCC0_MC3_Handler;                     /*  89 Timer Counter Control (TCC0) */
-  void* pfnTCC0_MC4_Handler;                     /*  90 Timer Counter Control (TCC0) */
-  void* pfnTCC0_MC5_Handler;                     /*  91 Timer Counter Control (TCC0) */
-  void* pfnTCC1_OTHER_Handler;                   /*  92 Timer Counter Control (TCC1) */
-  void* pfnTCC1_MC0_Handler;                     /*  93 Timer Counter Control (TCC1) */
-  void* pfnTCC1_MC1_Handler;                     /*  94 Timer Counter Control (TCC1) */
-  void* pfnTCC1_MC2_Handler;                     /*  95 Timer Counter Control (TCC1) */
-  void* pfnTCC1_MC3_Handler;                     /*  96 Timer Counter Control (TCC1) */
-  void* pfnTCC2_OTHER_Handler;                   /*  97 Timer Counter Control (TCC2) */
-  void* pfnTCC2_MC0_Handler;                     /*  98 Timer Counter Control (TCC2) */
-  void* pfnTCC2_MC1_Handler;                     /*  99 Timer Counter Control (TCC2) */
-  void* pfnTCC2_MC2_Handler;                     /* 100 Timer Counter Control (TCC2) */
-  void* pfnTCC3_OTHER_Handler;                   /* 101 Timer Counter Control (TCC3) */
-  void* pfnTCC3_MC0_Handler;                     /* 102 Timer Counter Control (TCC3) */
-  void* pfnTCC3_MC1_Handler;                     /* 103 Timer Counter Control (TCC3) */
-  void* pfnTCC4_OTHER_Handler;                   /* 104 Timer Counter Control (TCC4) */
-  void* pfnTCC4_MC0_Handler;                     /* 105 Timer Counter Control (TCC4) */
-  void* pfnTCC4_MC1_Handler;                     /* 106 Timer Counter Control (TCC4) */
-  void* pfnTC0_Handler;                          /* 107 Basic Timer Counter (TC0) */
-  void* pfnTC1_Handler;                          /* 108 Basic Timer Counter (TC1) */
-  void* pfnTC2_Handler;                          /* 109 Basic Timer Counter (TC2) */
-  void* pfnTC3_Handler;                          /* 110 Basic Timer Counter (TC3) */
-  void* pfnTC4_Handler;                          /* 111 Basic Timer Counter (TC4) */
-  void* pfnTC5_Handler;                          /* 112 Basic Timer Counter (TC5) */
-  void* pvReserved113;
-  void* pvReserved114;
-  void* pfnPDEC_OTHER_Handler;                   /* 115 Quadrature Decodeur (PDEC) */
-  void* pfnPDEC_MC0_Handler;                     /* 116 Quadrature Decodeur (PDEC) */
-  void* pfnPDEC_MC1_Handler;                     /* 117 Quadrature Decodeur (PDEC) */
-  void* pfnADC0_OTHER_Handler;                   /* 118 Analog Digital Converter (ADC0) */
-  void* pfnADC0_RESRDY_Handler;                  /* 119 Analog Digital Converter (ADC0) */
-  void* pfnADC1_OTHER_Handler;                   /* 120 Analog Digital Converter (ADC1) */
-  void* pfnADC1_RESRDY_Handler;                  /* 121 Analog Digital Converter (ADC1) */
-  void* pfnAC_Handler;                           /* 122 Analog Comparators (AC) */
-  void* pfnDAC_OTHER_Handler;                    /* 123 Digital-to-Analog Converter (DAC) */
-  void* pfnDAC_EMPTY_0_Handler;                  /* 124 Digital-to-Analog Converter (DAC) */
-  void* pfnDAC_EMPTY_1_Handler;                  /* 125 Digital-to-Analog Converter (DAC) */
-  void* pfnDAC_RESRDY_0_Handler;                 /* 126 Digital-to-Analog Converter (DAC) */
-  void* pfnDAC_RESRDY_1_Handler;                 /* 127 Digital-to-Analog Converter (DAC) */
-  void* pfnI2S_Handler;                          /* 128 Inter-IC Sound Interface (I2S) */
-  void* pfnPCC_Handler;                          /* 129 Parallel Capture Controller (PCC) */
-  void* pfnAES_Handler;                          /* 130 Advanced Encryption Standard (AES) */
-  void* pfnTRNG_Handler;                         /* 131 True Random Generator (TRNG) */
-  void* pfnICM_Handler;                          /* 132 Integrity Check Monitor (ICM) */
-  void* pfnPUKCC_Handler;                        /* 133 PUblic-Key Cryptography Controller (PUKCC) */
-  void* pfnQSPI_Handler;                         /* 134 Quad SPI interface (QSPI) */
-  void* pfnSDHC0_Handler;                        /* 135 SD/MMC Host Controller (SDHC0) */
+  void (*pfnPM_Handler);                           /*   0 Power Manager (PM) */
+  void (*pfnMCLK_Handler);                         /*   1 Main Clock (MCLK) */
+  void (*pfnOSCCTRL_XOSC0_Handler);                /*   2 Oscillators Control (OSCCTRL) */
+  void (*pfnOSCCTRL_XOSC1_Handler);                /*   3 Oscillators Control (OSCCTRL) */
+  void (*pfnOSCCTRL_DFLL_Handler);                 /*   4 Oscillators Control (OSCCTRL) */
+  void (*pfnOSCCTRL_DPLL0_Handler);                /*   5 Oscillators Control (OSCCTRL) */
+  void (*pfnOSCCTRL_DPLL1_Handler);                /*   6 Oscillators Control (OSCCTRL) */
+  void (*pfnOSC32KCTRL_Handler);                   /*   7 32kHz Oscillators Control (OSC32KCTRL) */
+  void (*pfnSUPC_OTHER_Handler);                   /*   8 Supply Controller (SUPC) */
+  void (*pfnSUPC_BODDET_Handler);                  /*   9 Supply Controller (SUPC) */
+  void (*pfnWDT_Handler);                          /*  10 Watchdog Timer (WDT) */
+  void (*pfnRTC_Handler);                          /*  11 Real-Time Counter (RTC) */
+  void (*pfnEIC_EXTINT_0_Handler);                 /*  12 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_1_Handler);                 /*  13 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_2_Handler);                 /*  14 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_3_Handler);                 /*  15 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_4_Handler);                 /*  16 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_5_Handler);                 /*  17 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_6_Handler);                 /*  18 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_7_Handler);                 /*  19 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_8_Handler);                 /*  20 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_9_Handler);                 /*  21 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_10_Handler);                /*  22 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_11_Handler);                /*  23 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_12_Handler);                /*  24 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_13_Handler);                /*  25 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_14_Handler);                /*  26 External Interrupt Controller (EIC) */
+  void (*pfnEIC_EXTINT_15_Handler);                /*  27 External Interrupt Controller (EIC) */
+  void (*pfnFREQM_Handler);                        /*  28 Frequency Meter (FREQM) */
+  void (*pfnNVMCTRL_0_Handler);                    /*  29 Non-Volatile Memory Controller (NVMCTRL) */
+  void (*pfnNVMCTRL_1_Handler);                    /*  30 Non-Volatile Memory Controller (NVMCTRL) */
+  void (*pfnDMAC_0_Handler);                       /*  31 Direct Memory Access Controller (DMAC) */
+  void (*pfnDMAC_1_Handler);                       /*  32 Direct Memory Access Controller (DMAC) */
+  void (*pfnDMAC_2_Handler);                       /*  33 Direct Memory Access Controller (DMAC) */
+  void (*pfnDMAC_3_Handler);                       /*  34 Direct Memory Access Controller (DMAC) */
+  void (*pfnDMAC_OTHER_Handler);                   /*  35 Direct Memory Access Controller (DMAC) */
+  void (*pfnEVSYS_0_Handler);                      /*  36 Event System Interface (EVSYS) */
+  void (*pfnEVSYS_1_Handler);                      /*  37 Event System Interface (EVSYS) */
+  void (*pfnEVSYS_2_Handler);                      /*  38 Event System Interface (EVSYS) */
+  void (*pfnEVSYS_3_Handler);                      /*  39 Event System Interface (EVSYS) */
+  void (*pfnEVSYS_OTHER_Handler);                  /*  40 Event System Interface (EVSYS) */
+  void (*pfnPAC_Handler);                          /*  41 Peripheral Access Controller (PAC) */
+  void (*pvReserved42);
+  void (*pvReserved43);
+  void (*pvReserved44);
+  void (*pfnRAMECC_Handler);                       /*  45 RAM ECC (RAMECC) */
+  void (*pfnSERCOM0_0_Handler);                    /*  46 Serial Communication Interface (SERCOM0) */
+  void (*pfnSERCOM0_1_Handler);                    /*  47 Serial Communication Interface (SERCOM0) */
+  void (*pfnSERCOM0_2_Handler);                    /*  48 Serial Communication Interface (SERCOM0) */
+  void (*pfnSERCOM0_OTHER_Handler);                /*  49 Serial Communication Interface (SERCOM0) */
+  void (*pfnSERCOM1_0_Handler);                    /*  50 Serial Communication Interface (SERCOM1) */
+  void (*pfnSERCOM1_1_Handler);                    /*  51 Serial Communication Interface (SERCOM1) */
+  void (*pfnSERCOM1_2_Handler);                    /*  52 Serial Communication Interface (SERCOM1) */
+  void (*pfnSERCOM1_OTHER_Handler);                /*  53 Serial Communication Interface (SERCOM1) */
+  void (*pfnSERCOM2_0_Handler);                    /*  54 Serial Communication Interface (SERCOM2) */
+  void (*pfnSERCOM2_1_Handler);                    /*  55 Serial Communication Interface (SERCOM2) */
+  void (*pfnSERCOM2_2_Handler);                    /*  56 Serial Communication Interface (SERCOM2) */
+  void (*pfnSERCOM2_OTHER_Handler);                /*  57 Serial Communication Interface (SERCOM2) */
+  void (*pfnSERCOM3_0_Handler);                    /*  58 Serial Communication Interface (SERCOM3) */
+  void (*pfnSERCOM3_1_Handler);                    /*  59 Serial Communication Interface (SERCOM3) */
+  void (*pfnSERCOM3_2_Handler);                    /*  60 Serial Communication Interface (SERCOM3) */
+  void (*pfnSERCOM3_OTHER_Handler);                /*  61 Serial Communication Interface (SERCOM3) */
+  void (*pfnSERCOM4_0_Handler);                    /*  62 Serial Communication Interface (SERCOM4) */
+  void (*pfnSERCOM4_1_Handler);                    /*  63 Serial Communication Interface (SERCOM4) */
+  void (*pfnSERCOM4_2_Handler);                    /*  64 Serial Communication Interface (SERCOM4) */
+  void (*pfnSERCOM4_OTHER_Handler);                /*  65 Serial Communication Interface (SERCOM4) */
+  void (*pfnSERCOM5_0_Handler);                    /*  66 Serial Communication Interface (SERCOM5) */
+  void (*pfnSERCOM5_1_Handler);                    /*  67 Serial Communication Interface (SERCOM5) */
+  void (*pfnSERCOM5_2_Handler);                    /*  68 Serial Communication Interface (SERCOM5) */
+  void (*pfnSERCOM5_OTHER_Handler);                /*  69 Serial Communication Interface (SERCOM5) */
+  void (*pvReserved70);
+  void (*pvReserved71);
+  void (*pvReserved72);
+  void (*pvReserved73);
+  void (*pvReserved74);
+  void (*pvReserved75);
+  void (*pvReserved76);
+  void (*pvReserved77);
+  void (*pfnCAN0_Handler);                         /*  78 Control Area Network (CAN0) */
+  void (*pfnCAN1_Handler);                         /*  79 Control Area Network (CAN1) */
+  void (*pfnUSB_OTHER_Handler);                    /*  80 Universal Serial Bus (USB) */
+  void (*pfnUSB_SOF_HSOF_Handler);                 /*  81 Universal Serial Bus (USB) */
+  void (*pfnUSB_TRCPT0_Handler);                   /*  82 Universal Serial Bus (USB) */
+  void (*pfnUSB_TRCPT1_Handler);                   /*  83 Universal Serial Bus (USB) */
+  void (*pvReserved84);
+  void (*pfnTCC0_OTHER_Handler);                   /*  85 Timer Counter Control (TCC0) */
+  void (*pfnTCC0_MC0_Handler);                     /*  86 Timer Counter Control (TCC0) */
+  void (*pfnTCC0_MC1_Handler);                     /*  87 Timer Counter Control (TCC0) */
+  void (*pfnTCC0_MC2_Handler);                     /*  88 Timer Counter Control (TCC0) */
+  void (*pfnTCC0_MC3_Handler);                     /*  89 Timer Counter Control (TCC0) */
+  void (*pfnTCC0_MC4_Handler);                     /*  90 Timer Counter Control (TCC0) */
+  void (*pfnTCC0_MC5_Handler);                     /*  91 Timer Counter Control (TCC0) */
+  void (*pfnTCC1_OTHER_Handler);                   /*  92 Timer Counter Control (TCC1) */
+  void (*pfnTCC1_MC0_Handler);                     /*  93 Timer Counter Control (TCC1) */
+  void (*pfnTCC1_MC1_Handler);                     /*  94 Timer Counter Control (TCC1) */
+  void (*pfnTCC1_MC2_Handler);                     /*  95 Timer Counter Control (TCC1) */
+  void (*pfnTCC1_MC3_Handler);                     /*  96 Timer Counter Control (TCC1) */
+  void (*pfnTCC2_OTHER_Handler);                   /*  97 Timer Counter Control (TCC2) */
+  void (*pfnTCC2_MC0_Handler);                     /*  98 Timer Counter Control (TCC2) */
+  void (*pfnTCC2_MC1_Handler);                     /*  99 Timer Counter Control (TCC2) */
+  void (*pfnTCC2_MC2_Handler);                     /* 100 Timer Counter Control (TCC2) */
+  void (*pfnTCC3_OTHER_Handler);                   /* 101 Timer Counter Control (TCC3) */
+  void (*pfnTCC3_MC0_Handler);                     /* 102 Timer Counter Control (TCC3) */
+  void (*pfnTCC3_MC1_Handler);                     /* 103 Timer Counter Control (TCC3) */
+  void (*pfnTCC4_OTHER_Handler);                   /* 104 Timer Counter Control (TCC4) */
+  void (*pfnTCC4_MC0_Handler);                     /* 105 Timer Counter Control (TCC4) */
+  void (*pfnTCC4_MC1_Handler);                     /* 106 Timer Counter Control (TCC4) */
+  void (*pfnTC0_Handler);                          /* 107 Basic Timer Counter (TC0) */
+  void (*pfnTC1_Handler);                          /* 108 Basic Timer Counter (TC1) */
+  void (*pfnTC2_Handler);                          /* 109 Basic Timer Counter (TC2) */
+  void (*pfnTC3_Handler);                          /* 110 Basic Timer Counter (TC3) */
+  void (*pfnTC4_Handler);                          /* 111 Basic Timer Counter (TC4) */
+  void (*pfnTC5_Handler);                          /* 112 Basic Timer Counter (TC5) */
+  void (*pvReserved113);
+  void (*pvReserved114);
+  void (*pfnPDEC_OTHER_Handler);                   /* 115 Quadrature Decodeur (PDEC) */
+  void (*pfnPDEC_MC0_Handler);                     /* 116 Quadrature Decodeur (PDEC) */
+  void (*pfnPDEC_MC1_Handler);                     /* 117 Quadrature Decodeur (PDEC) */
+  void (*pfnADC0_OTHER_Handler);                   /* 118 Analog Digital Converter (ADC0) */
+  void (*pfnADC0_RESRDY_Handler);                  /* 119 Analog Digital Converter (ADC0) */
+  void (*pfnADC1_OTHER_Handler);                   /* 120 Analog Digital Converter (ADC1) */
+  void (*pfnADC1_RESRDY_Handler);                  /* 121 Analog Digital Converter (ADC1) */
+  void (*pfnAC_Handler);                           /* 122 Analog Comparators (AC) */
+  void (*pfnDAC_OTHER_Handler);                    /* 123 Digital-to-Analog Converter (DAC) */
+  void (*pfnDAC_EMPTY_0_Handler);                  /* 124 Digital-to-Analog Converter (DAC) */
+  void (*pfnDAC_EMPTY_1_Handler);                  /* 125 Digital-to-Analog Converter (DAC) */
+  void (*pfnDAC_RESRDY_0_Handler);                 /* 126 Digital-to-Analog Converter (DAC) */
+  void (*pfnDAC_RESRDY_1_Handler);                 /* 127 Digital-to-Analog Converter (DAC) */
+  void (*pfnI2S_Handler);                          /* 128 Inter-IC Sound Interface (I2S) */
+  void (*pfnPCC_Handler);                          /* 129 Parallel Capture Controller (PCC) */
+  void (*pfnAES_Handler);                          /* 130 Advanced Encryption Standard (AES) */
+  void (*pfnTRNG_Handler);                         /* 131 True Random Generator (TRNG) */
+  void (*pfnICM_Handler);                          /* 132 Integrity Check Monitor (ICM) */
+  void (*pfnPUKCC_Handler);                        /* 133 PUblic-Key Cryptography Controller (PUKCC) */
+  void (*pfnQSPI_Handler);                         /* 134 Quad SPI interface (QSPI) */
+  void (*pfnSDHC0_Handler);                        /* 135 SD/MMC Host Controller (SDHC0) */
 } DeviceVectors;
 
 #endif /* !(defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__)) */
