@@ -1,44 +1,53 @@
 # Project name
 PROJ_NAME = myosynRelease
+# Wildcard Function
+rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
 # Toolchain
 CC = arm-none-eabi-gcc
 AS = arm-none-eabi-as
 LD = arm-none-eabi-gcc
+MAKE = mingw32-make
 OBJCOPY = arm-none-eabi-objcopy
 SIZE = arm-none-eabi-size
-INCLUDE = -I./include -I./SAME51_DFP/3.6.130/include/ -I./CMSIS_5/CMSIS/Core/Include/
 BUILD_DIRECTORY = releaseBuild
+BUILD_DIRECTORY_SOURCE = $(BUILD_DIRECTORY)\src
 LINKER_DIRECTIVE_DIRECTORY = ./scripts/linker/
 
+ALL_C_SOURCES := $(call rwildcard,src/,*.c)
+ALL_H_SOURCES := $(call rwildcard,src/,*.h)
+DIRS := $(patsubst %/,%,$(dir $(ALL_C_SOURCES)))
+INCLUDE_DIRS := $(patsubst %/,-I./%,$(dir $(ALL_H_SOURCES))) # Right now all modules have visibility into all others. Should be okay.
+
+INCLUDE = -I./SAME51_DFP/3.6.130/include/ -I./CMSIS_5/CMSIS/Core/Include/ $(INCLUDE_DIRS)
 # Compiler and linker flags
 CFLAGS_ERRORS = -Wall -Wextra -Werror -Wunused -Wfloat-equal -Wshadow -Wstack-usage=49152 #Check stack size in same51j19a_flash.ld
-CFLAGS_RELEASE = -mcpu=cortex-m4 -mthumb -O2 -g $(CFLAGS_ERRORS)  $(INCLUDE)
+CFLAGS_RELEASE = -mcpu=cortex-m4 -mthumb -O2 -s $(CFLAGS_ERRORS)  $(INCLUDE)
 ASFLAGS = -mcpu=cortex-m4 -mthumb
 LDFLAGS = -mcpu=cortex-m4 -mthumb -specs=nosys.specs -Wl,-Map=$(BUILD_DIRECTORY)/$(PROJ_NAME).map -T $(LINKER_DIRECTIVE_DIRECTORY)same51j19a_flash.ld
 
-# Source files
-C_SOURCES = startup_same51j19a.c stubs.c main.c
 #ASM_SOURCES = reset_handler.s
-OBJECTS = $(C_SOURCES:%.c=$(BUILD_DIRECTORY)/%.o) $(ASM_SOURCES:%.s=$(BUILD_DIRECTORY)/%.o)
+OBJECTS = $(ALL_C_SOURCES:%.c=$(BUILD_DIRECTORY)/%.o) $(ASM_SOURCES:%.s=$(BUILD_DIRECTORY)/%.o)
 
 # Build rules
-all: $(BUILD_DIRECTORY)/$(PROJ_NAME).elf
+all: init $(BUILD_DIRECTORY)/$(PROJ_NAME).elf
 
 $(BUILD_DIRECTORY)/$(PROJ_NAME).elf: $(OBJECTS)
 	$(LD) $(LDFLAGS) -o $@ $^
 	$(OBJCOPY) -O binary $@ $(BUILD_DIRECTORY)/$(PROJ_NAME).bin
 	$(SIZE) $@
 
-$(BUILD_DIRECTORY)/%.o: %.c initDirectory
-	$(CC) $(CFLAGS_RELEASE) -c $< -o $@
+$(BUILD_DIRECTORY)/%.o: %.c
+	touch $@ && $(CC) $(CFLAGS_RELEASE) -c $< -o $@
 
-$(BUILD_DIRECTORY)/%.o: %.s initDirectory
+$(BUILD_DIRECTORY)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
 clean:
-	rm -f -r $(BUILD_DIRECTORY)/*.o $(BUILD_DIRECTORY)/*.elf $(BUILD_DIRECTORY)/*.bin $(BUILD_DIRECTORY)/*.map
-	cmd.exe /c rmdir $(BUILD_DIRECTORY)
+	cmd.exe /c rmdir /s /q $(BUILD_DIRECTORY)	
+init:
 	cmd.exe /c mkdir $(BUILD_DIRECTORY)
+	cmd.exe /c mkdir $(BUILD_DIRECTORY)\src
+	cmd.exe /c xcopy /t /e /I src $(BUILD_DIRECTORY_SOURCE)
 
 .PHONY: all clean
