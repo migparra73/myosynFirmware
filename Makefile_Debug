@@ -43,6 +43,7 @@ $(BUILD_DIRECTORY)/%.o: %.c
 $(BUILD_DIRECTORY)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
+# These are windows specific commands.
 clean:
 	cmd.exe /c rmdir /s /q $(BUILD_DIRECTORY)	
 init:
