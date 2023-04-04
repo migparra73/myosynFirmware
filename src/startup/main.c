@@ -29,6 +29,7 @@
 
 #include "same51j19a.h"
 #include <stdlib.h>
+#include "kernel.h"
 
 /** \cond 0 */
 /* *INDENT-OFF* */
@@ -76,10 +77,9 @@ void SystemCoreClockUpdate(void)
 
 int main(void)
 {
-    int *myMemory;
-    myMemory = malloc(5);
-
-    *myMemory = 6;
+    int myMemory;
+    myMemory = myKernel(5);
+    myMemory = myMemory + 1;
     return 0;
 }
 

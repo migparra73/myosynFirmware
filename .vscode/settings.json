@@ -3,7 +3,8 @@
         "same51j19a.h": "c",
         "base.h": "c",
         "stdint.h": "c",
-        "system_same51.h": "c"
+        "system_same51.h": "c",
+        "kernel.h": "c"
     },
     // These settings tweaks to the cmake plugin will ensure
     // that you debug using cortex-debug instead of trying to launch
@@ -24,5 +25,6 @@
     },
     "cortex-debug.openocdPath": "openocd.exe",
     "cortex-debug.variableUseNaturalFormat": false,
-    "cortex-debug.registerUseNaturalFormat": false
+    "cortex-debug.registerUseNaturalFormat": false,
+    "cmake.configureOnOpen": false
 }
