@@ -4,7 +4,8 @@
         "base.h": "c",
         "stdint.h": "c",
         "system_same51.h": "c",
-        "kernel.h": "c"
+        "kernel.h": "c",
+        "tc.h": "c"
     },
     // These settings tweaks to the cmake plugin will ensure
     // that you debug using cortex-debug instead of trying to launch
