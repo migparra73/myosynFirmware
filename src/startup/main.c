@@ -78,6 +78,17 @@ void SystemCoreClockUpdate(void)
 int main(void)
 {
     int myMemory;
+
+    // Here, add driver initialization code.
+    // We will need:
+    /*
+
+        I2C - for sensor communication
+        SPI - for reading / writing to local flash memory
+        CAN - for external communication
+        USB HID - lowest latency
+        GPIO / PWM - Host MCU will send trains of pulses to other MCUs to trigger sampling?
+    */
     myMemory = myKernel(5);
     myMemory = myMemory + 1;
     return 0;

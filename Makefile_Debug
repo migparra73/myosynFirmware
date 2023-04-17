@@ -43,12 +43,10 @@ $(BUILD_DIRECTORY)/%.o: %.c
 $(BUILD_DIRECTORY)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
-# These are windows specific commands.
 clean:
-	cmd.exe /c rmdir /s /q $(BUILD_DIRECTORY)	
+	rm -rf $(BUILD_DIRECTORY)	
 init:
-	cmd.exe /c mkdir $(BUILD_DIRECTORY)
-	cmd.exe /c mkdir $(BUILD_DIRECTORY)\src
-	cmd.exe /c xcopy /t /e /I src $(BUILD_DIRECTORY_SOURCE)
+	mkdir -p $(BUILD_DIRECTORY)
+	find src -type d | xargs -I{} mkdir -p $(BUILD_DIRECTORY)/{}
 
 .PHONY: all clean

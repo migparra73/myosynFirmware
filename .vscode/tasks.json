@@ -24,7 +24,7 @@
         {
             "label": "Build Debug",
             "type": "shell",
-            "command": "mingw32-make -f ${workspaceFolder}/Makefile_Debug",
+            "command": "make -f ${workspaceFolder}/Makefile_Debug",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -36,13 +36,13 @@
         {
             "label": "Clean Debug",
             "type": "shell",
-            "command": "mingw32-make -f ${workspaceFolder}/Makefile_Debug clean",
+            "command": "make -f ${workspaceFolder}/Makefile_Debug clean",
             "problemMatcher": []
         },
         {
             "label": "Build Release",
             "type": "shell",
-            "command": "mingw32-make -f ${workspaceFolder}/Makefile_Release",
+            "command": "make -f ${workspaceFolder}/Makefile_Release",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -54,7 +54,7 @@
         {
             "label": "Clean Release",
             "type": "shell",
-            "command": "mingw32-make -f ${workspaceFolder}/Makefile_Release clean",
+            "command": "make -f ${workspaceFolder}/Makefile_Release clean",
             "problemMatcher": []
         }
     ]
